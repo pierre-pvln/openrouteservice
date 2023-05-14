@@ -5,15 +5,15 @@ services:
     ports:
       # api port
       - "8080:8080"
-      # don't know port
+      # don't know why 
       - "9001:9001"
 #    image: openrouteservice/openrouteservice:latest
     user: "${UID:-0}:${GID:-0}"
     build:
       context: ../
       args:
-        ORS_CONFIG: ./openrouteservice/src/main/resources/ors-config-sample.json
-        OSM_FILE: ./openrouteservice/src/main/files/heidelberg.osm.gz
+        ORS_CONFIG: ./openrouteservice/src/main/resources/ors-config-project.json
+#        OSM_FILE: ./openrouteservice/src/main/files/heidelberg.osm.gz
     volumes:
       # local/host volume name:volumename in docker container
       - ./graphs:/home/ors/ors-core/data/graphs
