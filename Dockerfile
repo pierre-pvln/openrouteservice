@@ -9,8 +9,9 @@ USER root
 
 # Install dependencies and locales
 # hadolint ignore=DL3008
+### added unzip
 RUN apt-get update -qq && \
-    apt-get install -qq -y --no-install-recommends nano moreutils jq wget && \
+    apt-get install -qq -y --no-install-recommends nano moreutils jq wget unzip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -61,7 +62,8 @@ RUN cp /ors-core/openrouteservice/src/main/resources/ors-config-sample.json /ors
 RUN mvn -f /ors-core/openrouteservice/pom.xml package -DskipTests
 
 # build final image, just copying stuff inside
-FROM eclipse-temurin:17.0.6_10-jre-alpine as publish
+###FROM eclipse-temurin:17.0.6_10-jre-alpine as publish
+FROM eclipse-temurin:17.0.6_10-jre as publish
 
 # Build ARGS
 ARG UID=1000
@@ -78,11 +80,18 @@ ENV CATALINA_PID=${BASE_FOLDER}/tomcat/temp/tomcat.pid
 ENV LANG='en_US' LANGUAGE='en_US' LC_ALL='en_US'
 
 # Setup the target system with the right user and folders.
-RUN apk add --no-cache bash=~'5.2' openssl=~'3.0' && \
-    addgroup -g ${GID} ors && \
-    adduser -D -h ${BASE_FOLDER} -u ${UID} -G ors ors &&  \
+###RUN apk add --no-cache bash=~'5.2' openssl=~'3.0' && \
+###    addgroup -g ${GID} ors && \
+###    adduser -D -h ${BASE_FOLDER} -u ${UID} -G ors ors &&  \
+###    mkdir -p ${BASE_FOLDER}/ors-core/logs/ors ${BASE_FOLDER}/ors-conf ${BASE_FOLDER}/tomcat/logs &&  \
+###    chown -R ors ${BASE_FOLDER}/tomcat ${BASE_FOLDER}/ors-core/logs/ors ${BASE_FOLDER}/ors-conf ${BASE_FOLDER}/tomcat/logs
+
+#RUN apk add --no-cache bash=~'5.2' openssl=~'3.0' && \
+RUN addgroup ors --gid ${GID} && \
+    adduser ors --disabled-password --home ${BASE_FOLDER} --uid ${UID} --ingroup ors &&  \
     mkdir -p ${BASE_FOLDER}/ors-core/logs/ors ${BASE_FOLDER}/ors-conf ${BASE_FOLDER}/tomcat/logs &&  \
     chown -R ors ${BASE_FOLDER}/tomcat ${BASE_FOLDER}/ors-core/logs/ors ${BASE_FOLDER}/ors-conf ${BASE_FOLDER}/tomcat/logs
+
 
 WORKDIR ${BASE_FOLDER}
 
