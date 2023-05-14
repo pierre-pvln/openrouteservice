@@ -102,6 +102,12 @@ COPY --chown=ors:ors --from=tomcat /tmp/tomcat ${BASE_FOLDER}/tomcat
 COPY --chown=ors:ors ./docker-entrypoint.sh ${BASE_FOLDER}/ors-core/docker-entrypoint.sh
 COPY --chown=ors:ors ./$OSM_FILE ${BASE_FOLDER}/ors-core/data/osm_file.pbf
 
+### get other country info
+RUN wget -q https://download.geofabrik.de/europe/netherlands-latest.osm.pbf -O ${BASE_FOLDER}/ors-core/data/netherland.pbf
+RUN wget -q https://download.geofabrik.de/europe/germany-latest.osm.pbf -O ${BASE_FOLDER}/ors-core/data/germany.pbf
+RUN chown ors:ors ${BASE_FOLDER}/ors-core/data/*.pbf
+
+
 USER ${UID}:${GID}
 
 ENV BUILD_GRAPHS="False"
