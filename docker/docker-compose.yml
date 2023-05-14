@@ -3,7 +3,9 @@ services:
   ors-app:
     container_name: ors-app
     ports:
+      # api port
       - "8080:8080"
+      # don't know port
       - "9001:9001"
 #    image: openrouteservice/openrouteservice:latest
     user: "${UID:-0}:${GID:-0}"
@@ -13,6 +15,7 @@ services:
         ORS_CONFIG: ./openrouteservice/src/main/resources/ors-config-sample.json
         OSM_FILE: ./openrouteservice/src/main/files/heidelberg.osm.gz
     volumes:
+      # local/host volume name:volumename in docker container
       - ./graphs:/home/ors/ors-core/data/graphs
       - ./elevation_cache:/home/ors/ors-core/data/elevation_cache
       - ./logs/ors:/home/ors/ors-core/logs/ors

@@ -103,7 +103,7 @@ COPY --chown=ors:ors ./docker-entrypoint.sh ${BASE_FOLDER}/ors-core/docker-entry
 COPY --chown=ors:ors ./$OSM_FILE ${BASE_FOLDER}/ors-core/data/osm_file.pbf
 
 ### get other country info
-RUN wget -q https://download.geofabrik.de/europe/netherlands-latest.osm.pbf -O ${BASE_FOLDER}/ors-core/data/netherland.pbf
+RUN wget -q https://download.geofabrik.de/europe/netherlands-latest.osm.pbf -O ${BASE_FOLDER}/ors-core/data/netherlands.pbf
 RUN wget -q https://download.geofabrik.de/europe/germany-latest.osm.pbf -O ${BASE_FOLDER}/ors-core/data/germany.pbf
 RUN chown ors:ors ${BASE_FOLDER}/ors-core/data/*.pbf
 
