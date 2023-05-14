@@ -21,6 +21,7 @@ services:
       - ./logs/ors:/home/ors/ors-core/logs/ors
       - ./logs/tomcat:/home/ors/tomcat/logs
       - ./conf:/home/ors/ors-conf
+      - ./data:/home/ors/ors-core/data
 #      - ./your_osm.pbf:/home/ors/ors-core/data/osm_file.pbf
     environment:
       - BUILD_GRAPHS=False  # Forces the container to rebuild the graphs, e.g. when PBF is changed
