@@ -43,7 +43,7 @@ WORKDIR /ors-core
 COPY openrouteservice/src /ors-core/openrouteservice/src
 COPY openrouteservice/WebContent /ors-core/openrouteservice/WebContent
 COPY openrouteservice/pom.xml /ors-core/openrouteservice/pom.xml
-COPY $ORS_CONFIG /ors-core/openrouteservice/src/main/resources/ors-config-sample.json
+#COPY $ORS_CONFIG /ors-core/openrouteservice/src/main/resources/ors-config-sample.json
 
 # Configure ors config:
 # Fist set pipefail to -c to allow intermediate pipes to throw errors
