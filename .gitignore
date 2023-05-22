@@ -24,6 +24,9 @@ openrouteservice/WebContent/WEB-INF/ors-config*
 !openrouteservice/WebContent/WEB-INF/ors-config-sample.json
 openrouteservice/src/main/resources/ors-config*
 !openrouteservice/src/main/resources/ors-config-sample.json
+# added for project
+!openrouteservice/src/main/resources/ors-config-project.json
+
 
 # Ignore folders generated from docker
 docker/elevation_cache
